@@ -1,0 +1,6 @@
+﻿  Source1.cpp
+C:\Download\Student\lovis\laba2\Source1.cpp(88,13): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+C:\Download\Student\lovis\laba2\Source1.cpp(90,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Download\Student\lovis\laba2\Source1.cpp(91,18): warning C4101: choice: неиспользованная локальная переменная
+C:\Download\Student\lovis\laba2\Source1.cpp(91,15): warning C4101: i: неиспользованная локальная переменная
+  laba2.vcxproj -> C:\Download\Student\lovis\laba2\x64\Debug\laba2.exe

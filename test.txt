@@ -1,0 +1,140 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+
+/*void shell(int* items, int count)
+{
+
+    int i, j, gap, k;
+    int x, a[5];
+
+    a[0] = 9; a[1] = 5; a[2] = 3; a[3] = 2; a[4] = 1;
+
+    for (k = 0; k < 5; k++) {
+        gap = a[k];
+        for (i = gap; i < count; ++i) {
+            x = items[i];
+            for (j = i - gap; (x < items[j]) && (j >= 0); j = j - gap)
+                items[j + gap] = items[j];
+            items[j + gap] = x;
+        }
+    }
+}
+
+void qs(int* items, int left, int right) //вызов функции: qs(items, 0, count-1);
+{
+    int i, j;
+    int x, y;
+
+    i = left; j = right;
+
+    // выбор компаранда 
+    x = items[(left + right) / 2];
+
+    do {
+        while ((items[i] < x) && (i < right)) i++;
+        while ((x < items[j]) && (j > left)) j--;
+
+        if (i <= j) {
+            y = items[i];
+            items[i] = items[j];
+            items[j] = y;
+            i++; j--;
+        }
+    } while (i <= j);
+
+    if (left < j) qs(items, left, j);
+    if (i < right) qs(items, i, right);
+}
+*/
+int comp(const void* x, const void* y) {
+    return (*(int*)x - *(int*)y);
+}
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+    srand(time(NULL));
+    int size, i, choice, size_2;
+    clock_t start, end;
+    double time_spent = 0.0;
+    int* arr = 0;
+    printf("Введите размер массива: ");
+    scanf("%d", &size);
+    arr = (int*)malloc(size * sizeof(int));
+    if (arr == NULL) {
+        printf("Не удалось выделить память!\n");
+        return;
+    }
+    do
+    {
+        printf("1. Заполнить массив по возрастающей\n");
+        printf("2. Заполнить массив по убывающей\n");
+        printf("3. Заполнить половину массива по возрастающей, а другую по убывающей\n");
+        printf("4. Заполнить массив случаными числами\n");
+        printf("5. Просмотреть массив\n");
+        printf("6. Выход\n");
+        printf("Выберите действие: ");
+        scanf("%d", &choice);
+        switch (choice) {
+        case 1: 
+            free(arr);
+            arr[0] = rand() % 100;
+            for (i = 1; i < size; i++) {
+                arr[i] = arr[i - 1] + rand() % 100;
+            }
+            break;
+        case 2: 
+            free(arr);
+            arr[size - 1] = rand() % 100;
+            for (i = size - 2; i >= 0; i--) {
+                arr[i] = arr[i + 1] + rand() % 100;
+            }
+            for (i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            break;
+        case 3:
+            size_2 = size / 2;
+            arr[0] = rand() % 100;
+            for (i = 1; i < size_2; i++) {
+                arr[i] = arr[i - 1] + rand() % 100;
+            }
+            arr[size - 1] = rand() % 100;
+            for (i = size - 2; i >= size_2; i--) {
+                    arr[i] = arr[i + 1] + rand() % 100;    
+            }
+            break;
+        case 4:
+            free(arr);
+            for (i = 0; i < size; i++) {
+                arr[i] = rand() % 100;
+            }
+            break;
+        case 5:
+            if (arr[0] == -842150451) {
+                printf("Сначала заполните массив!\n");
+                break;
+            }
+            for (i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+            break;
+        case 6:
+            printf("До свидания!\n");
+            break;
+        default:
+            system("cls");
+            printf("Некорректный выбор!\n");
+            break;
+        }
+    } while (choice != 6);
+
+    /*
+    qsort(arr, size, sizeof(int), comp);
+    for (i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }*/
+}
