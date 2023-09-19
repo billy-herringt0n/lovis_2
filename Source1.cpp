@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include <time.h>
 #include <locale.h>
 
@@ -180,5 +181,34 @@ void main() {
         printf("+---------------------------------------------------------+\n");
         printf("| . | %-14f|      %-16f| %-13f|\n", time_spent_10, time_spent_11, time_spent_12);
         printf("+---------------------------------------------------------+\n");
+        char n_file[50];
+        FILE* file;
+        printf("Введите имя файла для загрузки данных в него: ");
+        scanf("%s", n_file);
+        if (sizeof(n_file) > 50) {
+            printf("Имя файла превышает доступное значение (49)!\n");
+            return;
+        }
+        if ((file = fopen(n_file, "w")) == NULL)
+        {
+            printf("\nНевозможно открыть для записи файл: %s\n", n_file);
+            _getch();
+            return;
+        }
+        fprintf(file, "+---------------------------------------------------------+\n"
+            "|   |               |                    |                |\n"
+            "|   |      qs       |        shell       |      qsort     |\n"
+            "|   |               |                    |                |\n"
+            "+---+---------------+----------+---------+----------------+\n");
+        fprintf(file, "| \\ | %-14f|      %-16f| %-13f|\n", time_spent_1, time_spent_2, time_spent_3);
+        fprintf(file, "+---------------------------------------------------------+\n");
+        fprintf(file, "| / | %-14f|      %-16f| %-13f|\n", time_spent_4, time_spent_5, time_spent_6);
+        fprintf(file, "+---------------------------------------------------------+\n");
+        fprintf(file, "| /\\| %-14f|      %-16f| %-13f|\n", time_spent_7, time_spent_8, time_spent_9);
+        fprintf(file, "+---------------------------------------------------------+\n");
+        fprintf(file, "| . | %-14f|      %-16f| %-13f|\n", time_spent_10, time_spent_11, time_spent_12);
+        fprintf(file, "+---------------------------------------------------------+\n");
+        fclose(file);
+        printf("Данные успешно записаны!\n");
 
 }
